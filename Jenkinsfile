@@ -33,7 +33,7 @@ pipeline {
             steps {
                 sh '''
                 echo "Scanning folder '${GRYPE_SCAN_TARGET}' with Grype..."
-                grype <target> -o sarif 2>/dev/null > report.sarif
+                ${GRYPE_BINARY_DIR}/grype ${GRYPE_SCAN_TARGET} -o sarif 2>/dev/null > ${GRYPE_REPORT}
                 '''
             }
         }
