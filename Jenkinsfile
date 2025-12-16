@@ -5,6 +5,7 @@ pipeline {
         GRYPE_BINARY_DIR = "${env.WORKSPACE}/bin"
         GRYPE_SCAN_TARGET = "${env.WORKSPACE}/test-workflow-ninja"
         GRYPE_REPORT = "grype-report.sarif"
+        GRYPE_VERSION = "v0.104.1"
     }
 
     stages {
@@ -14,7 +15,7 @@ pipeline {
                 echo "Installing Grype..."
                 mkdir -p ${GRYPE_BINARY_DIR}
                 export PATH=${GRYPE_BINARY_DIR}:$PATH
-                curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b ${GRYPE_BINARY_DIR}
+                curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b ${GRYPE_BINARY_DIR} -v ${GRYPE_VERSION}
                 grype version
                 '''
             }
